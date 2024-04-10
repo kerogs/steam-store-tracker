@@ -1,0 +1,144 @@
+$green: green;
+$orange: #bd7b00;
+$red: red;
+$blue: blue;
+$background:#eee;
+$background2:#fff;
+$background3:#ddd;
+$color:#000;
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $background;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.notif{
+    text-align: center;
+    p{
+        color: $background;
+        padding: 10px;
+    }
+    &.success{
+        background-color: $green;
+    }
+    &.notification{
+        background-color: $orange;
+    }
+    &.error{
+        background-color: $red;
+    }
+}
+
+#settings{
+    display:none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid $color;
+    background-color: $background3;
+    border-radius: .5rem;
+    padding: 10px;
+    width: 60vw;
+    height: 80vh;
+    z-index: 999;
+
+    h2{
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    hr{
+        margin: 20px 0;
+    }
+}
+
+.green{
+    color: $green;
+}
+.orange{
+    color: $orange;
+}
+.red{
+    color: $red;
+}
+.blue{
+    color: $blue;
+}
+
+img{
+    max-width: 100%;
+}
+
+header{
+    h1{
+        text-align: center;
+        margin: 5px 0 20px 0;
+    }
+
+    .container{
+        display: flex;
+
+        > div{
+            flex: 1;
+            text-align: center;
+
+            > img{
+                height: 200px;
+            }
+        }
+
+        .mpi{
+            ul{
+                list-style: none;
+                padding-left: 0;
+
+                li{
+                    font-size: 18px;
+                    i{
+                        vertical-align: middle;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+
+        .actionlist{
+            display: flex;
+            margin: 10px 0;
+            button{
+                cursor: pointer;
+                font-size: 16px;
+                margin: 5px;
+            }
+        }
+    }
+}
+
+table{
+    width: 100%;
+    box-sizing: border-box;
+    thead{
+        background-color: #fff;
+    }
+    tbody{
+        background-color: #fcfcfc;
+        td{
+            padding: 5px;
+        }
+        tr:hover{
+            background-color: $background3;
+        }
+        td:nth-child(3){
+            color: $blue;
+        }
+        td:nth-child(7){
+            text-align: center;
+        }
+    }
+}

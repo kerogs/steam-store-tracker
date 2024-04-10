@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.notif {
+  text-align: center;
+}
+.notif p {
+  color: #eee;
+  padding: 10px;
+}
+.notif.success {
+  background-color: green;
+}
+.notif.notification {
+  background-color: #bd7b00;
+}
+.notif.error {
+  background-color: red;
+}
+
+#settings {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000;
+  background-color: #ddd;
+  border-radius: 0.5rem;
+  padding: 10px;
+  width: 60vw;
+  height: 80vh;
+  z-index: 999;
+}
+#settings h2 {
+  text-align: center;
+  margin: 10px 0;
+}
+#settings hr {
+  margin: 20px 0;
+}
+
+.green {
+  color: green;
+}
+
+.orange {
+  color: #bd7b00;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+img {
+  max-width: 100%;
+}
+
+header h1 {
+  text-align: center;
+  margin: 5px 0 20px 0;
+}
+header .container {
+  display: flex;
+}
+header .container > div {
+  flex: 1;
+  text-align: center;
+}
+header .container > div > img {
+  height: 200px;
+}
+header .container .mpi ul {
+  list-style: none;
+  padding-left: 0;
+}
+header .container .mpi ul li {
+  font-size: 18px;
+}
+header .container .mpi ul li i {
+  vertical-align: middle;
+  font-size: 20px;
+}
+header .container .actionlist {
+  display: flex;
+  margin: 10px 0;
+}
+header .container .actionlist button {
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+table {
+  width: 100%;
+  box-sizing: border-box;
+}
+table thead {
+  background-color: #fff;
+}
+table tbody {
+  background-color: #fcfcfc;
+}
+table tbody td {
+  padding: 5px;
+}
+table tbody tr:hover {
+  background-color: #ddd;
+}
+table tbody td:nth-child(3) {
+  color: blue;
+}
+table tbody td:nth-child(7) {
+  text-align: center;
+}/*# sourceMappingURL=style.css.map */
