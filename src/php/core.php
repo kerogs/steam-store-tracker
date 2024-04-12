@@ -93,10 +93,10 @@ function getItem($url)
 
             $prix = preg_replace("/[^0-9.]/", "", $prix);
         } else {
-            $prix = 'Prix non trouvé';
+            $prix = false;
         }
     } else {
-        $prix = 'Élément non trouvé';
+        $prix = false;
     }
 
     return ['prix' => $prix];
@@ -123,3 +123,10 @@ function calculatePercentage($entry_price, $current_price) {
 
     return $formatted_percentage;
 }
+
+function applyTwoPercent($number) {
+    $reduction = $number * 0.15;
+    $new_number = $number - $reduction;
+    return $new_number;
+};
+

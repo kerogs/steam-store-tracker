@@ -33,12 +33,12 @@
                 <h2>Most profitable items</h2>
                 <ul>
                     <li>Ak74 - Ardoise : <span class="green">+13% (+0.32$) <i class='bx bx-trending-up'></i></span></li>
-                    <li>Ak74 - Ardoise : <span class="orange">+0% (0.00$) <i class='bx bx-move-vertical'></i></i></span></li>
+                    <li>Ak74 - Ardoise : <span class="orange">+0% (0.00$) <i class='bx bx-move-vertical'></i></span></li>
                     <li>Ak74 - Ardoise : <span class="red">-8% (-0.04$) <i class='bx bx-trending-down'></i></span></li>
                 </ul>
             </div>
-            <div>
-                <a href="https://github.com/kerogs/steam-store-tracker" target="_blank"><img src="./src/img/ksmg-dark.svg" alt=""></a>
+            <div class="graph">
+                <h2>Graphic</h2>
             </div>
             <div>
                 <h2>Settings</h2>
@@ -59,7 +59,8 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>QUALITY</th>
-                <th>PRICE (Actual)</th>
+                <th>SELL PREVIEW</th>
+                <th>PRICE (ACTUAL)</th>
                 <th>PRICE (DEFAULT)</th>
                 <th>ITEM LINK</th>
                 <th>ACTION</th>
@@ -77,18 +78,51 @@
                         $itemInventoryName = pathinfo($itemInventory);
                         $itemJSON = file_get_contents("./data/account/" . $_COOKIE['sst_token'] . "/item/$itemInventory");
                         $itemData = json_decode($itemJSON, true);
-                        if($itemData['itemPriceDefault'] < $itemData['itemPriceActual']){
-                            $itemTypeColor = "green";
-                            $itemTypeIcon = "<i class='bx bx-trending-up'></i></span>";
+                        switch (true) {
+                            case $itemData['itemPriceDefault'] < $itemData['itemPriceActual']:
+                                $itemTypeColor = "green";
+                                $itemTypeIcon = "<i class='bx bx-trending-up'></i></span>";
+                                break;
+                            case $itemData['itemPriceDefault'] > $itemData['itemPriceActual']:
+                                $itemTypeColor = "red";
+                                $itemTypeIcon = "<i class='bx bx-trending-down'></i>";
+                                break;
+                            case $itemData['itemPriceDefault'] == $itemData['itemPriceActual']:
+                                $itemTypeColor = "blue";
+                                $itemTypeIcon = "<i class='bx bx-move-vertical'></i>";
+                                break;
+                            default:
+                                $itemTypeColor = "orange";
+                                $itemTypeIcon = "<i class='bx bxs-bug' ></i>";
+                                break;
                         }
-                        echo '<td>'.$itemsNumber.'</td>';
-                        echo '<td title="/data/account/'.$_COOKIE['sst_token'].'/item/'.$itemInventory.'">' . $itemInventoryName['filename'] . '</td>';
-                        echo '<td> '. $itemData['itemName'] .' </td>';
-                        echo '<td> '. $itemData['itemQuality'] .'</td>';
-                        echo '<td class="'.$itemTypeColor.'">'. $itemData['itemPriceActual'].'$ ('.calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']).') '.$itemTypeIcon.'</td>';
-                        echo '<td>'. $itemData['itemPriceDefault'].'$</td>';
-                        echo '<td><a href="'.$itemData['itemURL'].'" target="_blank">STORE</a></td>';
-                        echo '<td><button class="red" data-settings="item-delete" data-id="'.$itemInventoryName['filename'].'">DELETE</button> <button class="blue">REFRESH</button></td>';
+
+                        $priceTwoPercent = round(applyTwoPercent($itemData['itemPriceActual']), 2);
+                        switch (true) {
+                            case $priceTwoPercent < $itemData['priceDefault']:
+                                $itemTypeColorTwoPercent = "red";
+                                $itemTypeIconTwoPercent = "<i class='bx bx-trending-down'></i>";
+                            case $priceTwoPercent > $itemData['priceDefault']:
+                                $itemTypeColorTwoPercent = "green";
+                                $itemTypeIconTwoPercent = "<i class='bx bx-trending-up'></i></span>";
+                            case $priceTwoPercent == $itemData['priceDefault']:
+                                $itemTypeColorTwoPercent = "blue";
+                                $itemTypeIconTwoPercent = "<i class='bx bx-move-vertical'></i>";
+                            default:
+                                $itemTypeColorTwoPercent = "orange";
+                                $itemTypeIconTwoPercent = "<i class='bx bxs-bug' ></i>";
+                                break;
+                        }
+
+                        echo '<td>' . $itemsNumber . '</td>';
+                        echo '<td title="/data/account/' . $_COOKIE['sst_token'] . '/item/' . $itemInventory . '">' . $itemInventoryName['filename'] . '</td>';
+                        echo '<td> ' . $itemData['itemName'] . ' </td>';
+                        echo '<td> ' . $itemData['itemQuality'] . '</td>';
+                        echo '<td class="'.$itemTypeColorTwoPercent.'">'. $priceTwoPercent .'$ ('. calculatePercentage($priceTwoPercent, $itemData['itemDefault']) .') '. $itemTypeIconTwoPercent .'</td>';
+                        echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . '$ (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
+                        echo '<td>' . $itemData['itemPriceDefault'] . '$</td>';
+                        echo '<td><a href="' . $itemData['itemURL'] . '" target="_blank">STORE</a></td>';
+                        echo '<td><button class="red" data-settings="item-delete" data-id="' . $itemInventoryName['filename'] . '">DELETE</button> <button class="blue">REFRESH</button></td>';
                         echo '</tr>';
 
                         $itemsNumber++;
