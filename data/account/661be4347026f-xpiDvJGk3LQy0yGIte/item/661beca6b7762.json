@@ -6,5 +6,31 @@
     "itemQuality": "Field-Tested",
     "itemPriceDefault": "1.33",
     "itemPriceActual": "1.30",
-    "itemType": "\u20ac"
+    "itemType": "\u20ac",
+    "track": [
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "1.30"
+            }
+        ],
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "1.30"
+            }
+        ],
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "1.30"
+            }
+        ],
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "1.30"
+            }
+        ]
+    ]
 }

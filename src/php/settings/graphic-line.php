@@ -1,0 +1,1 @@
+<h2>Next update available</h2>

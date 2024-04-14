@@ -11,133 +11,246 @@
     <link rel="stylesheet" href="./src/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
-    <!-- https://steamcommunity.com/market/listings/730/AK-47%20%7C%20Slate%20%28Minimal%20Wear%29?l=french -->
-    <?php
+    <!-- 
+    <header>
 
-    echo isset($_GET['e']) ? '<div class="notif error"><p>' . $_GET['e'] . '</p></div>' : '';
-    echo isset($_GET['n']) ? '<div class="notif notification"><p>' . $_GET['n'] . '</p></div>' : '';
-    echo isset($_GET['s']) ? '<div class="notif success"><p>' . $_GET['s'] . '</p></div>' : '';
+        <div class="content">
+            <img src="./src/img/ksm-logo-white.png" alt="">
 
-    ?>
+            <a href=""><button><i class='bx bxs-dashboard'></i> Dashboard</button></a>
+            <a href=""><button><i class='bx bxs-cog'></i> Settings</button></a>
+        </div>
 
-    <div id="settings">
-    </div>
+    </header> -->
 
-    <?php include_once './src/php/header.php' ?>
+    <div class="container">
+        <div class="header">
+            <div class="content">
+                <img src="./src/img/ksmg-light.svg" alt="">
 
-    <main>
+                <a href=""><button><i class='bx bxs-dashboard'></i> Dashboard</button></a>
+                <a href=""><button><i class='bx bxs-cog'></i> Settings</button></a>
+                <a href="https://github.com/kerogs/steam-store-tracker" target="_blank"><button><i class='bx bxl-github'></i> Github</button></a>
+            </div>
+        </div>
 
-        <table>
-            <thead>
-                <th>#</th>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>QUALITY</th>
-                <th>PRICE (ACTUAL)</th>
-                <th>PRICE (DEFAULT)</th>
-                <th>ITEM LINK</th>
-                <th>ACTION</th>
-            </thead>
-            <tbody>
+        <div class="sidenav">
+            <h2>New item</h2>
+
+            <form action="settings-send.php" method="post">
+                <input type="text" name="itemName" id="" placeholder="Name" required>
+                <input type="url" name="itemURL" id="" placeholder="Url" required>
+                <select name="itemQuality" id="">
+                    <option value="Factory New">Factory New (0.00 - 0.07)</option>
+                    <option value="Minimal Wear">Minimal Wear (0.07 - 0.15)</option>
+                    <option value="Field-Tested">Field-Tested (0.15 – 0.38) </option>
+                    <option value="Well-Worn">Well-Worn (0.38 – 0.45)</option>
+                    <option value="Battle-Scarred">Battle-Scarred (0.45 – 1.00)</option>
+                </select>
+                <input type="number" name="itemPriceDefault" step="0.01" id="" placeholder="default price" required>
+                <input class="greenbtn" type="submit" value="Add">
+                <input type="hidden" name="token" value="<?= $_COOKIE['sst_token'] ?>">
+            </form>
+
+            <hr>
+        </div>
+
+        <div class="sidecontrol">
+            <ul>
                 <?php
 
                 $items = scandir("./data/account/" . $_COOKIE['sst_token'] . "/item");
-                $itemsNumber = 1;
+                $itemsWithPercentage = [];
+
                 foreach ($items as $itemInventory) {
                     if ($itemInventory == '.' || $itemInventory == "..") {
-                    } else {
-                        // print_r();
-                        echo '<tr>';
-                        $itemInventoryName = pathinfo($itemInventory);
-                        $itemJSON = file_get_contents("./data/account/" . $_COOKIE['sst_token'] . "/item/$itemInventory");
-                        $itemData = json_decode($itemJSON, true);
-                        switch (true) {
-                            case $itemData['itemPriceDefault'] < $itemData['itemPriceActual']:
-                                $itemTypeColor = "green";
-                                $itemTypeIcon = "<i class='bx bx-trending-up'></i></span>";
-                                break;
-                            case $itemData['itemPriceDefault'] > $itemData['itemPriceActual']:
-                                $itemTypeColor = "red";
-                                $itemTypeIcon = "<i class='bx bx-trending-down'></i>";
-                                break;
-                            case $itemData['itemPriceDefault'] == $itemData['itemPriceActual']:
-                                $itemTypeColor = "blue";
-                                $itemTypeIcon = "<i class='bx bx-move-vertical'></i>";
-                                break;
-                            default:
-                                $itemTypeColor = "orange";
-                                $itemTypeIcon = "<i class='bx bxs-bug' ></i>";
-                                break;
-                        }
+                        continue;
+                    }
 
-                        switch (true) {
-                            case stripos(strtolower($itemData['itemName']), "souvenir") !== false:
-                                $itemNameType = "souvenir";
-                                break;
-                            case stripos(strtolower($itemData['itemName']), "stattrak") !== false:
-                                $itemNameType = "stattrak";
-                                break;
-                            default:
-                                $itemNameType = "blue";
-                                break;
-                        }
+                    $itemJSON = file_get_contents("./data/account/" . $_COOKIE['sst_token'] . "/item/$itemInventory");
+                    $itemData = json_decode($itemJSON, true);
 
-
-                        echo '<td>' . $itemsNumber . '</td>';
-                        echo '<td title="/data/account/' . $_COOKIE['sst_token'] . '/item/' . $itemInventory . '">' . $itemInventoryName['filename'] . '</td>';
-                        echo '<td class="' . $itemNameType . '"> ' . $itemData['itemName'] . ' </td>';
-                        echo '<td> ' . $itemData['itemQuality'] . '</td>';
-                        echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . $itemData['itemType'] . ' (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
-                        echo '<td>' . $itemData['itemPriceDefault'] . $itemData['itemType'] . '</td>';
-                        echo '<td><a href="' . $itemData['itemURL'] . '" target="_blank">STORE</a></td>';
-                        echo '<td><button class="red" data-settings="item-delete" data-reload="true" data-id="' . $itemInventoryName['filename'] . '">DELETE</button> <button data-settings="item-refresh" data-id="'.$itemData['itemID'].'" class="blue">REFRESH</button></td>';
-                        echo '</tr>';
-
-                        $itemsNumber++;
+                    $percentage = calculatePercentage($itemData['itemPriceActual'], $itemData['itemPriceDefault']);
+                    if ($percentage != 0) {
+                        $itemsWithPercentage[$itemInventory] = $percentage;
                     }
                 }
 
-                ?>
-            </tbody>
-        </table>
+                // Tri du tableau en fonction des pourcentages (du plus grand au plus petit)
+                uasort($itemsWithPercentage, function ($a, $b) {
 
-    </main>
+                    return $b <=> $a;
+                });
+
+                $topThreeItems = array_keys(array_slice($itemsWithPercentage, 0, 30));
+
+                foreach ($topThreeItems as $itemInventory) {
+                    $itemJSON = file_get_contents("./data/account/" . $_COOKIE['sst_token'] . "/item/$itemInventory");
+                    $itemData = json_decode($itemJSON, true);
+
+                    switch (true) {
+                        case $itemData['itemPriceDefault'] < $itemData['itemPriceActual']:
+                            $itemTypeColor = "green";
+                            $itemTypeIcon = "<i class='bx bx-trending-up'></i></span>";
+                            break;
+                        case $itemData['itemPriceDefault'] > $itemData['itemPriceActual']:
+                            $itemTypeColor = "red";
+                            $itemTypeIcon = "<i class='bx bx-trending-down'></i>";
+                            break;
+                        case $itemData['itemPriceDefault'] == $itemData['itemPriceActual']:
+                            $itemTypeColor = "blue";
+                            $itemTypeIcon = "<i class='bx bx-move-vertical'></i>";
+                            break;
+                        default:
+                            $itemTypeColor = "orange";
+                            $itemTypeIcon = "<i class='bx bxs-bug'></i>";
+                            break;
+                    }
+
+                    switch (true) {
+                        case stripos(strtolower($itemData['itemName']), "souvenir") !== false:
+                            $itemNameType = "souvenir";
+                            break;
+                        case stripos(strtolower($itemData['itemName']), "stattrak") !== false:
+                            $itemNameType = "stattrak";
+                            break;
+                        default:
+                            $itemNameType = "blue";
+                            break;
+                    }
+
+
+                    echo '<li class="' . $itemTypeColor . '"><span class="' . $itemNameType . '">' . $itemData['itemName'] . '</span> <span class="' . $itemTypeColor . '">' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ' (' . $itemData['itemPriceActual'] . $itemData['itemType'] . ') ' . $itemTypeIcon . '</span> </li>';
+                }
+
+                ?>
+
+
+            </ul>
+        </div>
+
+        <div class="list">
+            <table>
+                <thead>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quality</th>
+                    <th>Price (actual)</th>
+                    <th>Price (Default)</th>
+                    <th>Item</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <?php
+
+                    $items = scandir("./data/account/" . $_COOKIE['sst_token'] . "/item");
+                    $itemsNumber = 1;
+                    foreach ($items as $itemInventory) {
+                        if ($itemInventory == '.' || $itemInventory == "..") {
+                        } else {
+                            // print_r();
+                            echo '<tr>';
+                            $itemInventoryName = pathinfo($itemInventory);
+                            $itemJSON = file_get_contents("./data/account/" . $_COOKIE['sst_token'] . "/item/$itemInventory");
+                            $itemData = json_decode($itemJSON, true);
+                            switch (true) {
+                                case $itemData['itemPriceDefault'] < $itemData['itemPriceActual']:
+                                    $itemTypeColor = "green";
+                                    $itemTypeIcon = "<i class='bx bx-trending-up'></i></span>";
+                                    break;
+                                case $itemData['itemPriceDefault'] > $itemData['itemPriceActual']:
+                                    $itemTypeColor = "red";
+                                    $itemTypeIcon = "<i class='bx bx-trending-down'></i>";
+                                    break;
+                                case $itemData['itemPriceDefault'] == $itemData['itemPriceActual']:
+                                    $itemTypeColor = "blue";
+                                    $itemTypeIcon = "<i class='bx bx-move-vertical'></i>";
+                                    break;
+                                default:
+                                    $itemTypeColor = "orange";
+                                    $itemTypeIcon = "<i class='bx bxs-bug' ></i>";
+                                    break;
+                            }
+
+                            switch (true) {
+                                case stripos(strtolower($itemData['itemName']), "souvenir") !== false:
+                                    $itemNameType = "souvenir";
+                                    break;
+                                case stripos(strtolower($itemData['itemName']), "stattrak") !== false:
+                                    $itemNameType = "stattrak";
+                                    break;
+                                default:
+                                    $itemNameType = "blue";
+                                    break;
+                            }
+
+
+                            echo '<td>' . $itemsNumber . '</td>';
+                            echo '<td title="/data/account/' . $_COOKIE['sst_token'] . '/item/' . $itemInventory . '">' . $itemInventoryName['filename'] . '</td>';
+                            echo '<td class="' . $itemNameType . '"> ' . $itemData['itemName'] . ' </td>';
+                            echo '<td> ' . $itemData['itemQuality'] . '</td>';
+                            echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . $itemData['itemType'] . ' (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
+                            echo '<td>' . $itemData['itemPriceDefault'] . $itemData['itemType'] . '</td>';
+                            echo '<td><a href="' . $itemData['itemURL'] . '" target="_blank">STORE</a></td>';
+                            echo '<td><button class="red">DELETE</button> <a href="./action.php?id=' . $itemData['itemID'] . '&refresh=true"><button class="blue">REFRESH</button></a>  ';
+                            echo '</tr>';
+
+                            $itemsNumber++;
+                        }
+                    }
+
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="control">
+            <button data-name="total">Total value</button>
+            <button data-name="history">History</button>
+            <button data-name="line">Tracker</button>
+        </div>
+
+        <div class="stats">
+            <div data-object="total">
+                <?php require_once './src/php/settings/graphic-circle.php' ?>
+            </div>
+            <div style="display:none;" data-object="line">
+                <?php require_once './src/php/settings/graphic-line.php' ?>
+            </div>
+        </div>
+    </div>
+
 
 </body>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
-<script src="./src/js/script.js"></script> -->
+<!-- script -->
 <script>
-document.addEventListener("click", function(event) {
-    const clickedButton = event.target;
-    if (clickedButton.tagName === "BUTTON" && clickedButton.dataset.settings) {
-        const settingName = clickedButton.dataset.settings;
-        const id = clickedButton.dataset.id || "";
-        const reload = clickedButton.dataset.reload === "true";
-        const filePath = `./src/php/settings/${settingName}.php?id=${id}`;
+    // Sélectionner tous les boutons de contrôle
+    const buttons = document.querySelectorAll('.control button');
 
-        fetch(filePath)
-            .then(response => response.text())
-            .then(data => {
-                const settingsDiv = document.getElementById("settings");
-                settingsDiv.innerHTML = data;
-                settingsDiv.style.display = "block";
+    // Ajouter un gestionnaire d'événements à chaque bouton
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Récupérer la valeur de l'attribut data-name du bouton cliqué
+            const dataName = button.dataset.name;
 
-                if (reload) {
-                    setTimeout(() => {
-                        location.reload();
-                    }, 100); // Delay rechargement de la page pour laisser le temps pour l'affichage des données
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching settings:", error);
+            // Masquer tous les éléments de la classe 'stats'
+            const stats = document.querySelectorAll('.stats > div');
+            stats.forEach(stat => {
+                stat.style.display = 'none';
             });
-    }
-});
 
-
+            // Afficher uniquement le div correspondant à l'attribut data-object égal à dataName
+            const selectedStat = document.querySelector(`[data-object="${dataName}"]`);
+            selectedStat.style.display = 'block';
+        });
+    });
 </script>
+
 
 </html>

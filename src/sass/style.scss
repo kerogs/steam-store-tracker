@@ -1,64 +1,31 @@
-$green: green;
-$orange: #bd7b00;
-$red: red;
-$blue: rgb(70, 70, 255);
-$background:#ffffff;
-$background2:#f3f3f3;
-$background3:#ffffff;
-$color:#0e0e0e;
-$souvenir:#998200;
-$stattrak:#cd6932;
+$background: #121421;
+$background2: #1e2336;
+$background3: #131722;
+$background4: #232a3d;
+$hr: rgba(255, 255, 255, 0.26);
+$color: #fff;
+$blue: #3e5ea6;
 
-*{
+$souvenir:#ffe60a;
+$stattrak:#cd6932;
+$green: #27aa5c;
+$orange: orange;
+$red: #e63a12;
+
+* {
     margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: $background;
     color: $color;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.notif{
-    text-align: center;
-    p{
-        color: $background;
-        padding: 10px;
-    }
-    &.success{
-        background-color: $green;
-    }
-    &.notification{
-        background-color: $orange;
-    }
-    &.error{
-        background-color: $red;
-    }
-}
-
-#settings{
-    display:none;
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-
-    border: 1px solid $color;
-    background-color: $background3;
-    border-radius: .5rem;
-    padding: 10px;
-    width: 60vw;
-    height: 80vh;
-    z-index: 999;
-
-    h2{
-        text-align: center;
-        margin: 10px 0;
-    }
-
-    hr{
-        margin: 20px 0;
-    }
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    width: 100%;
+    // position: absolute;
 }
 
 .green{
@@ -80,100 +47,190 @@ body{
     color: $stattrak;
 }
 
-img{
-    max-width: 100%;
+.header {
+    // position: absolute;
+    overflow: hidden;
+
+    .content {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 10px;
+
+        img {
+            max-height: 100%;
+            margin-right: auto;
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: $color;
+            font-size: 20px;
+            margin: 0 5px;
+            font-weight: lighter;
+
+            &:hover {
+                color: $blue;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
-header{
-    h1{
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-rows: 0.4fr 0.4fr 4fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    width: 100%;
+    height: 100vh;
+    grid-template-areas:
+        "header header header header"
+        "sidenav control control control"
+        "sidenav stats stats sidecontrol"
+        "sidenav list list list";
+
+    > div{
+        border: 1px solid $hr;
+    }
+}
+
+.header {
+    grid-area: header; 
+}
+
+.sidenav {
+    grid-area: sidenav;
+    background-color: $background2;
+
+    padding: 10px;
+    max-height: 100%;
+    overflow: auto;
+
+    h2{
         text-align: center;
-        margin: 5px 0 20px 0;
     }
 
-    .container{
-        display: flex;
+    hr{
+        border: 1px solid $hr;
+        margin: 5px 0;
+    }
 
-        > div{
-            flex: 1;
+    form{
+        width: 100%;
+
+        input, select{
+            width: 100%;
+            background-color: $background4;
+            color: $color;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            margin: 4px 0;
+            font-size: 16px;
+        }
+
+        input[type="submit"]{
+            &:hover{
+                opacity: .8;
+                cursor: pointer;
+            }
+
+            &.greenbtn{
+                background-color: $green;
+            }
+        }
+    }
+}
+
+.control {
+    grid-area: control;
+    display: flex;
+    align-items: center;
+
+    button{
+        background-color: $background2;
+        outline: none;
+        color: $color;
+        border: none;
+        margin: 0 0 0 10px;
+        font-size: 19px;
+        padding: 10px;
+
+        &:hover{
+            cursor: pointer;
+            background-color: $blue;
+        }
+    }
+}
+
+.sidecontrol {
+    grid-area: sidecontrol;
+    max-height: 100%;
+    overflow: scroll;
+
+    ul{
+        padding-left: 0;
+        list-style: none;
+
+        li{
+            padding: 5px 0;
             text-align: center;
 
-            > img{
-                height: 200px;
-            }
-        }
-
-        .mpi{
-            ul{
-                list-style: none;
-                padding-left: 0;
-
-                li{
-                    font-size: 18px;
-                    margin: 10px 0;
-                    // display: flex;
-                    i{
-                        vertical-align: middle;
-                        font-size: 20px;
-                    }
-                }
-
-                hr{
-                    max-width: 300px;
-                    margin: 0 auto;
-                }
+            &.green{
+                background-color: #27aa5b18;
             }
 
-            .bar{
-                width: 100px;
-                height: 20px;
-                border: 1px solid #000;
-                display: inline-block;
-                vertical-align: middle;
+            &.red{
+                background-color: #e63a1218;
             }
-        }
-
-        .graph{
-            canvas{
-                max-height:300px;
-            }
-        }
-
-        .actionlist{
-            display: flex;
-            margin: 10px 0;
-            button{
-                cursor: pointer;
-                font-size: 16px;
-                margin: 5px;
+            &.blue{
+                background-color: #3e5ea618;
             }
         }
     }
 }
 
-table{
-    max-width: 90vw;
-    margin: 5vh auto;
-    border-collapse: collapse;
-    caption-side: top;
-    font-feature-settings: "tnum";
-    inline-size: 100%;
-    margin-block-end: 1.5rem;
-    vertical-align: middle;
-    color: $color;
-    transition: .4s;
-    thead{
-        border: 1px solid $color;
-    }
-    tbody{
-        border: 1px solid gray;
-        td{
-            padding: 5px;
-            &:nth-child(7),&:nth-child(6), &:nth-child(5){
-                text-align: center;
+.list {
+    grid-area: list;
+    max-height: 100%;
+    overflow: auto;
+
+    table{
+        width: 100%;
+
+        tr{
+            &:hover{
+                background-color: $background3;
             }
         }
-        tr:hover{
-            background-color: #0e0e0e21;
+
+        td{
+            padding: 5px 0;
         }
+
+        button{
+            cursor: pointer;
+        }
+    }
+}
+
+.stats {
+    grid-area: stats;
+
+    max-height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    canvas{
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #myPieChart{
+        max-width: 60%;
     }
 }

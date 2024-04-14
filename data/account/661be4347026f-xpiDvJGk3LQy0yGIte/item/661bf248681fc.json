@@ -5,6 +5,14 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=StatTrak%E2%84%A2+MP9+%7C+Black+Sand+%28Well-Worn%29",
     "itemQuality": "Well-Worn",
     "itemPriceDefault": "0.13",
-    "itemPriceActual": "0.11",
-    "itemType": "\u20ac"
+    "itemPriceActual": "0.12",
+    "itemType": "\u20ac",
+    "track": [
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "0.11"
+            }
+        ]
+    ]
 }

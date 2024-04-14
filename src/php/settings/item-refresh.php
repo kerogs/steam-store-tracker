@@ -29,6 +29,13 @@ if ($itemJSON !== null) {
     }
     $itemJSON['track'][] = $newTrack;
 
+    $itemURLJSON = $itemJSON['itemURLJSON'];
+    $get = file_get_contents($itemURLJSON);
+    $getJSON = json_decode($get);
+    $itemPriceActual = str_replace(',', '.', preg_replace('/[^0-9,.]/', '', $getJSON->lowest_price));
+
+    $itemJSON['itemPriceActual'] = $itemPriceActual;
+
     // Enregistrer le contenu JSON mis à jour dans le fichier
     file_put_contents($pathJSON, json_encode($itemJSON, JSON_PRETTY_PRINT));
 } else {
