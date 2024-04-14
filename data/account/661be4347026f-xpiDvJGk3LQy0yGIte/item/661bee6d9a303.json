@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=M4A4+%7C+Mainframe+%28Factory+New%29",
     "itemQuality": "Factory New",
     "itemPriceDefault": "0.20",
-    "itemPriceActual": "0.10",
+    "itemPriceActual": "0.11",
     "itemType": "\u20ac",
     "track": [
         [
@@ -13,6 +13,22 @@
                 "date": "14\/04\/2024",
                 "price": "0.10"
             }
-        ]
+        ],
+        {
+            "date": "14\/04\/2024",
+            "price": "0.11"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.11"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.11"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.11"
+        }
     ]
 }

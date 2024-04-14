@@ -6,8 +6,8 @@ $hr: rgba(255, 255, 255, 0.26);
 $color: #fff;
 $blue: #3e5ea6;
 
-$souvenir:#ffe60a;
-$stattrak:#cd6932;
+$souvenir: #ffe60a;
+$stattrak: #cd6932;
 $green: #27aa5c;
 $orange: orange;
 $red: #e63a12;
@@ -26,24 +26,36 @@ body {
     height: 100vh;
     width: 100%;
     // position: absolute;
+
+    width: 100%;
+    height: 100%;
+    // --color: rgba(114, 114, 114, 0.11);
+    // background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+    //     linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    // background-size: 55px 55px;
 }
 
-.green{
+.green {
     color: $green;
 }
-.orange{
+
+.orange {
     color: $orange;
 }
-.red{
+
+.red {
     color: $red;
 }
-.blue{
+
+.blue {
     color: $blue;
 }
-.souvenir{
+
+.souvenir {
     color: $souvenir;
 }
-.stattrak{
+
+.stattrak {
     color: $stattrak;
 }
 
@@ -92,13 +104,14 @@ body {
         "sidenav stats stats sidecontrol"
         "sidenav list list list";
 
-    > div{
+    >div {
         border: 1px solid $hr;
     }
 }
 
 .header {
-    grid-area: header; 
+    grid-area: header;
+    background-color: $background;
 }
 
 .sidenav {
@@ -109,19 +122,20 @@ body {
     max-height: 100%;
     overflow: auto;
 
-    h2{
+    h2 {
         text-align: center;
     }
 
-    hr{
+    hr {
         border: 1px solid $hr;
         margin: 5px 0;
     }
 
-    form{
+    form {
         width: 100%;
 
-        input, select{
+        input,
+        select {
             width: 100%;
             background-color: $background4;
             color: $color;
@@ -132,13 +146,13 @@ body {
             font-size: 16px;
         }
 
-        input[type="submit"]{
-            &:hover{
+        input[type="submit"] {
+            &:hover {
                 opacity: .8;
                 cursor: pointer;
             }
 
-            &.greenbtn{
+            &.greenbtn {
                 background-color: $green;
             }
         }
@@ -149,8 +163,9 @@ body {
     grid-area: control;
     display: flex;
     align-items: center;
+    background-color: $background;
 
-    button{
+    button {
         background-color: $background2;
         outline: none;
         color: $color;
@@ -159,7 +174,7 @@ body {
         font-size: 19px;
         padding: 10px;
 
-        &:hover{
+        &:hover {
             cursor: pointer;
             background-color: $blue;
         }
@@ -167,26 +182,28 @@ body {
 }
 
 .sidecontrol {
+    background-color: $background;
     grid-area: sidecontrol;
     max-height: 100%;
     overflow: scroll;
 
-    ul{
+    ul {
         padding-left: 0;
         list-style: none;
 
-        li{
+        li {
             padding: 5px 0;
             text-align: center;
 
-            &.green{
+            &.green {
                 background-color: #27aa5b18;
             }
 
-            &.red{
+            &.red {
                 background-color: #e63a1218;
             }
-            &.blue{
+
+            &.blue {
                 background-color: #3e5ea618;
             }
         }
@@ -194,24 +211,25 @@ body {
 }
 
 .list {
+    background-color: $background;
     grid-area: list;
     max-height: 100%;
     overflow: auto;
 
-    table{
+    table {
         width: 100%;
 
-        tr{
-            &:hover{
+        tr {
+            &:hover {
                 background-color: $background3;
             }
         }
 
-        td{
+        td {
             padding: 5px 0;
         }
 
-        button{
+        button {
             cursor: pointer;
         }
     }
@@ -224,13 +242,14 @@ body {
     overflow: hidden;
     position: relative;
 
-    canvas{
+    canvas {
         position: absolute;
-        top: 50%; left: 50%;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
     }
 
-    #myPieChart{
+    #myPieChart {
         max-width: 60%;
     }
 }

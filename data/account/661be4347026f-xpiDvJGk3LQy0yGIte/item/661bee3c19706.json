@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=AWP+%7C+Capillary+%28Field-Tested%29",
     "itemQuality": "Field-Tested",
     "itemPriceDefault": "0.23",
-    "itemPriceActual": "0.21",
+    "itemPriceActual": "0.19",
     "itemType": "\u20ac",
     "track": [
         [
@@ -13,6 +13,28 @@
                 "date": "14\/04\/2024",
                 "price": "0.21"
             }
-        ]
+        ],
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "0.21"
+            }
+        ],
+        {
+            "date": "14\/04\/2024",
+            "price": "0.19"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": ""
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.19"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.19"
+        }
     ]
 }

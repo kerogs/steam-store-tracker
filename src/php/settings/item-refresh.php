@@ -38,5 +38,4 @@ if ($itemJSON !== null) {
 
     // Enregistrer le contenu JSON mis à jour dans le fichier
     file_put_contents($pathJSON, json_encode($itemJSON, JSON_PRETTY_PRINT));
-} else {
 }

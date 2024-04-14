@@ -11,6 +11,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100vh;
   width: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .green {
@@ -79,6 +81,7 @@ body {
 
 .header {
   grid-area: header;
+  background-color: #121421;
 }
 
 .sidenav {
@@ -98,7 +101,8 @@ body {
 .sidenav form {
   width: 100%;
 }
-.sidenav form input, .sidenav form select {
+.sidenav form input,
+.sidenav form select {
   width: 100%;
   background-color: #232a3d;
   color: #fff;
@@ -120,6 +124,7 @@ body {
   grid-area: control;
   display: flex;
   align-items: center;
+  background-color: #121421;
 }
 .control button {
   background-color: #1e2336;
@@ -136,6 +141,7 @@ body {
 }
 
 .sidecontrol {
+  background-color: #121421;
   grid-area: sidecontrol;
   max-height: 100%;
   overflow: scroll;
@@ -159,6 +165,7 @@ body {
 }
 
 .list {
+  background-color: #121421;
   grid-area: list;
   max-height: 100%;
   overflow: auto;

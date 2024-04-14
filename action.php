@@ -51,7 +51,14 @@ if ($_GET['refresh']) {
         file_put_contents($pathJSON, json_encode($itemJSON, JSON_PRETTY_PRINT));
     }
 
-    $returnStatus = "Update for :".$itemJSON['itemName'];
+    $returnStatus = "Update for : ".$itemJSON['itemName'];
+}
+
+if($_GET['delete']){
+    $pathJSON = './data/account/' . $_COOKIE['sst_token'] . "/item/" . $_GET['id'] . ".json";
+    unlink($pathJSON);
+
+    $returnStatus = "Suppression confirmé (".$_GET['id'].")";
 }
 
 if (isset($returnStatus)) {

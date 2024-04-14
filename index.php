@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="./src/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script> -->
 
 </head>
 
@@ -57,6 +60,10 @@
             </form>
 
             <hr>
+
+            <form action="all-refresh.php">
+                <input class="bluebtn" type="submit" value="All refresh">
+            </form>
         </div>
 
         <div class="sidecontrol">
@@ -197,7 +204,7 @@
                             echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . $itemData['itemType'] . ' (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
                             echo '<td>' . $itemData['itemPriceDefault'] . $itemData['itemType'] . '</td>';
                             echo '<td><a href="' . $itemData['itemURL'] . '" target="_blank">STORE</a></td>';
-                            echo '<td><button class="red">DELETE</button> <a href="./action.php?id=' . $itemData['itemID'] . '&refresh=true"><button class="blue">REFRESH</button></a>  ';
+                            echo '<td><a href="./action.php?id=' . $itemData['itemID'] . '&delete=true"><button class="red">DELETE</button></a> <a href="./action.php?id=' . $itemData['itemID'] . '&refresh=true"><button class="blue">REFRESH</button></a>  ';
                             echo '</tr>';
 
                             $itemsNumber++;
@@ -212,8 +219,9 @@
 
         <div class="control">
             <button data-name="total">Total value</button>
-            <button data-name="history">History</button>
-            <button data-name="line">Tracker</button>
+            <button data-name="most-profitable">Most profitable</button>
+            <button data-name="ohlc">OHLC</button>
+            <button data-name="tracker">Tracker</button>
         </div>
 
         <div class="stats">
@@ -221,7 +229,13 @@
                 <?php require_once './src/php/settings/graphic-circle.php' ?>
             </div>
             <div style="display:none;" data-object="line">
-                <?php require_once './src/php/settings/graphic-line.php' ?>
+                <?php require_once './src/php/settings/graphic-ohlc.php' ?>
+            </div>
+            <div style="display:none;" data-object="most-profitable">
+                <?php require_once './src/php/settings/graphic-mostprofitable.php' ?>
+            </div>
+            <div style="display:none;" data-object="tracker">
+                <!-- <?php require_once './src/php/settings/graphic-tracker.php' ?> -->
             </div>
         </div>
     </div>

@@ -6,5 +6,29 @@
     "itemQuality": "Minimal Wear",
     "itemPriceDefault": "0.04",
     "itemPriceActual": "0.03",
-    "itemType": "\u20ac"
+    "itemType": "\u20ac",
+    "track": [
+        [
+            {
+                "date": "14\/04\/2024",
+                "price": "0.03"
+            }
+        ],
+        {
+            "date": "14\/04\/2024",
+            "price": "0.03"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.03"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.03"
+        },
+        {
+            "date": "14\/04\/2024",
+            "price": "0.03"
+        }
+    ]
 }
