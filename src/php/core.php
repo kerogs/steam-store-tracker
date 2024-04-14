@@ -24,6 +24,9 @@ if (!isset($_COOKIE['sst_token'])) {
 
     $data = array(
         "token" => $token,
+        "currency" => 3,
+        "country" => "US",
+        "appid" => "730",
         "theme" => array(
             "light" => true
         )
@@ -43,6 +46,7 @@ $servData = json_decode($jsonServData, true);
 
 // ? Path to the account
 $tokenPath = "./data/account/" . $_COOKIE['sst_token'];
+$userJSON = json_decode($tokenPath."/data.json");
 
 // ? serverDATA
 $serverJSON = file_get_contents('./data/serverData.json');
@@ -116,7 +120,7 @@ function calculatePercentage($entry_price, $current_price) {
     if ($percentage > 0) {
         $formatted_percentage = "+" . $formatted_percentage;
     } elseif ($percentage == 0) {
-        $formatted_percentage = "0.00%";
+        $formatted_percentage = "+0.00%";
     } else {
         $formatted_percentage = "-" . $formatted_percentage;
     }
@@ -125,7 +129,7 @@ function calculatePercentage($entry_price, $current_price) {
 }
 
 function applyTwoPercent($number) {
-    $reduction = $number * 0.15;
+    $reduction = $number * 0.10;
     $new_number = $number - $reduction;
     return $new_number;
 };

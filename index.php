@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SST</title>
-    <link rel="shortcut icon" href="./src/img/ksmg-light.svg" type="image/x-icon">:
+    <link rel="shortcut icon" href="./src/img/ksmg-light.svg" type="image/x-icon">
     <link rel="stylesheet" href="./src/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -25,31 +26,7 @@
     <div id="settings">
     </div>
 
-    <header>
-        <h1>Steam Store Tracker</h1>
-
-        <div class="container">
-            <div class="mpi">
-                <h2>Most profitable items</h2>
-                <ul>
-                    <li>Ak74 - Ardoise : <span class="green">+13% (+0.32$) <i class='bx bx-trending-up'></i></span></li>
-                    <li>Ak74 - Ardoise : <span class="orange">+0% (0.00$) <i class='bx bx-move-vertical'></i></span></li>
-                    <li>Ak74 - Ardoise : <span class="red">-8% (-0.04$) <i class='bx bx-trending-down'></i></span></li>
-                </ul>
-            </div>
-            <div class="graph">
-                <h2>Graphic</h2>
-            </div>
-            <div>
-                <h2>Settings</h2>
-                ID : <?= $_COOKIE['sst_token'] ?> <br>
-                Version : <span class="green"><?= $serverVersion ?></span>
-                <div class="actionlist">
-                    <button data-settings="add-item">New item <i class='bx bxs-message-alt-add'></i></button>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?php include_once './src/php/header.php' ?>
 
     <main>
 
@@ -59,7 +36,6 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>QUALITY</th>
-                <th>SELL PREVIEW</th>
                 <th>PRICE (ACTUAL)</th>
                 <th>PRICE (DEFAULT)</th>
                 <th>ITEM LINK</th>
@@ -97,32 +73,27 @@
                                 break;
                         }
 
-                        $priceTwoPercent = round(applyTwoPercent($itemData['itemPriceActual']), 2);
                         switch (true) {
-                            case $priceTwoPercent < $itemData['priceDefault']:
-                                $itemTypeColorTwoPercent = "red";
-                                $itemTypeIconTwoPercent = "<i class='bx bx-trending-down'></i>";
-                            case $priceTwoPercent > $itemData['priceDefault']:
-                                $itemTypeColorTwoPercent = "green";
-                                $itemTypeIconTwoPercent = "<i class='bx bx-trending-up'></i></span>";
-                            case $priceTwoPercent == $itemData['priceDefault']:
-                                $itemTypeColorTwoPercent = "blue";
-                                $itemTypeIconTwoPercent = "<i class='bx bx-move-vertical'></i>";
+                            case stripos(strtolower($itemData['itemName']), "souvenir") !== false:
+                                $itemNameType = "souvenir";
+                                break;
+                            case stripos(strtolower($itemData['itemName']), "stattrak") !== false:
+                                $itemNameType = "stattrak";
+                                break;
                             default:
-                                $itemTypeColorTwoPercent = "orange";
-                                $itemTypeIconTwoPercent = "<i class='bx bxs-bug' ></i>";
+                                $itemNameType = "blue";
                                 break;
                         }
 
+
                         echo '<td>' . $itemsNumber . '</td>';
                         echo '<td title="/data/account/' . $_COOKIE['sst_token'] . '/item/' . $itemInventory . '">' . $itemInventoryName['filename'] . '</td>';
-                        echo '<td> ' . $itemData['itemName'] . ' </td>';
+                        echo '<td class="' . $itemNameType . '"> ' . $itemData['itemName'] . ' </td>';
                         echo '<td> ' . $itemData['itemQuality'] . '</td>';
-                        echo '<td class="'.$itemTypeColorTwoPercent.'">'. $priceTwoPercent .'$ ('. calculatePercentage($priceTwoPercent, $itemData['itemDefault']) .') '. $itemTypeIconTwoPercent .'</td>';
-                        echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . '$ (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
-                        echo '<td>' . $itemData['itemPriceDefault'] . '$</td>';
+                        echo '<td class="' . $itemTypeColor . '">' . $itemData['itemPriceActual'] . $itemData['itemType'] . ' (' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ') ' . $itemTypeIcon . '</td>';
+                        echo '<td>' . $itemData['itemPriceDefault'] . $itemData['itemType'] . '</td>';
                         echo '<td><a href="' . $itemData['itemURL'] . '" target="_blank">STORE</a></td>';
-                        echo '<td><button class="red" data-settings="item-delete" data-id="' . $itemInventoryName['filename'] . '">DELETE</button> <button class="blue">REFRESH</button></td>';
+                        echo '<td><button class="red" data-settings="item-delete" data-reload="true" data-id="' . $itemInventoryName['filename'] . '">DELETE</button> <button data-settings="item-refresh" data-id="'.$itemData['itemID'].'" class="blue">REFRESH</button></td>';
                         echo '</tr>';
 
                         $itemsNumber++;
@@ -136,25 +107,37 @@
     </main>
 
 </body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+<script src="./src/js/script.js"></script> -->
 <script>
-    document.addEventListener("click", function(event) {
-        const clickedButton = event.target;
-        if (clickedButton.tagName === "BUTTON" && clickedButton.dataset.settings) {
-            const settingName = clickedButton.dataset.settings;
-            const filePath = `./src/php/settings/${settingName}.php`;
+document.addEventListener("click", function(event) {
+    const clickedButton = event.target;
+    if (clickedButton.tagName === "BUTTON" && clickedButton.dataset.settings) {
+        const settingName = clickedButton.dataset.settings;
+        const id = clickedButton.dataset.id || "";
+        const reload = clickedButton.dataset.reload === "true";
+        const filePath = `./src/php/settings/${settingName}.php?id=${id}`;
 
-            fetch(filePath)
-                .then(response => response.text())
-                .then(data => {
-                    const settingsDiv = document.getElementById("settings");
-                    settingsDiv.innerHTML = data;
-                    settingsDiv.style.display = "block";
-                })
-                .catch(error => {
-                    console.error("Error fetching settings:", error);
-                });
-        }
-    });
+        fetch(filePath)
+            .then(response => response.text())
+            .then(data => {
+                const settingsDiv = document.getElementById("settings");
+                settingsDiv.innerHTML = data;
+                settingsDiv.style.display = "block";
+
+                if (reload) {
+                    setTimeout(() => {
+                        location.reload();
+                    }, 100); // Delay rechargement de la page pour laisser le temps pour l'affichage des données
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching settings:", error);
+            });
+    }
+});
+
+
 </script>
 
 </html>

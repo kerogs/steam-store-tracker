@@ -4,8 +4,8 @@
 }
 
 body {
-  background-color: #121212;
-  color: #fff;
+  background-color: #ffffff;
+  color: #0e0e0e;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -13,7 +13,7 @@ body {
   text-align: center;
 }
 .notif p {
-  color: #121212;
+  color: #ffffff;
   padding: 10px;
 }
 .notif.success {
@@ -32,8 +32,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #fff;
-  background-color: #171717;
+  border: 1px solid #0e0e0e;
+  background-color: #ffffff;
   border-radius: 0.5rem;
   padding: 10px;
   width: 60vw;
@@ -64,6 +64,14 @@ body {
   color: rgb(70, 70, 255);
 }
 
+.souvenir {
+  color: #998200;
+}
+
+.stattrak {
+  color: #cd6932;
+}
+
 img {
   max-width: 100%;
 }
@@ -88,10 +96,25 @@ header .container .mpi ul {
 }
 header .container .mpi ul li {
   font-size: 18px;
+  margin: 10px 0;
 }
 header .container .mpi ul li i {
   vertical-align: middle;
   font-size: 20px;
+}
+header .container .mpi ul hr {
+  max-width: 300px;
+  margin: 0 auto;
+}
+header .container .mpi .bar {
+  width: 100px;
+  height: 20px;
+  border: 1px solid #000;
+  display: inline-block;
+  vertical-align: middle;
+}
+header .container .graph canvas {
+  max-height: 300px;
 }
 header .container .actionlist {
   display: flex;
@@ -104,25 +127,29 @@ header .container .actionlist button {
 }
 
 table {
-  width: 100%;
-  box-sizing: border-box;
-  color: #fff;
+  max-width: 90vw;
+  margin: 5vh auto;
+  border-collapse: collapse;
+  caption-side: top;
+  font-feature-settings: "tnum";
+  inline-size: 100%;
+  margin-block-end: 1.5rem;
+  vertical-align: middle;
+  color: #0e0e0e;
+  transition: 0.4s;
 }
 table thead {
-  background-color: #202020;
+  border: 1px solid #0e0e0e;
 }
 table tbody {
-  background-color: #121212;
+  border: 1px solid gray;
 }
 table tbody td {
   padding: 5px;
 }
-table tbody tr:hover {
-  background-color: #171717;
-}
-table tbody td:nth-child(3) {
-  color: rgb(70, 70, 255);
-}
-table tbody td:nth-child(7) {
+table tbody td:nth-child(7), table tbody td:nth-child(6), table tbody td:nth-child(5) {
   text-align: center;
+}
+table tbody tr:hover {
+  background-color: rgba(14, 14, 14, 0.1294117647);
 }/*# sourceMappingURL=style.css.map */
