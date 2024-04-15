@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=AK-47+%7C+Elite+Build+%28Well-Worn%29",
     "itemQuality": "Well-Worn",
     "itemPriceDefault": "1.07",
-    "itemPriceActual": "0.96",
+    "itemPriceActual": "0.99",
     "itemType": "\u20ac",
     "track": [
         [
@@ -46,6 +46,28 @@
             {
                 "date": "14\/04\/2024",
                 "price": "0.96"
+            }
+        ],
+        {
+            "date": "15\/04\/2024",
+            "price": "1."
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "1.01"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": ""
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.99"
+        },
+        [
+            {
+                "date": "15\/04\/2024",
+                "price": "0.99"
             }
         ]
     ]

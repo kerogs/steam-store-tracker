@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=StatTrak%E2%84%A2+Glock-18+%7C+Winterized+%28Field-Tested%29",
     "itemQuality": "Field-Tested",
     "itemPriceDefault": "0.29",
-    "itemPriceActual": "0.15",
+    "itemPriceActual": "0.14",
     "itemType": "\u20ac",
     "track": [
         [
@@ -29,6 +29,22 @@
         {
             "date": "14\/04\/2024",
             "price": "0.15"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.15"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.15"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.15"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.14"
         }
     ]
 }

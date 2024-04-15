@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=Galil+AR+%7C+Black+Sand+%28Well-Worn%29",
     "itemQuality": "Well-Worn",
     "itemPriceDefault": "0.11",
-    "itemPriceActual": "0.12",
+    "itemPriceActual": "0.13",
     "itemType": "\u20ac",
     "track": [
         [
@@ -29,6 +29,22 @@
         {
             "date": "14\/04\/2024",
             "price": "0.12"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.12"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.12"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": ""
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.13"
         }
     ]
 }

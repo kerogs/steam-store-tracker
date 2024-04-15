@@ -6,3 +6,6 @@ The site works without a database, everything is stored locally. Multiple accoun
 ***for the moment, only euro works.***
 
 ![alt text](image.png)
+
+Problem discovered:
+Due to bad servers on the steam side, when retrieving the price of certain weapons, steam may give no value. This will return an empty value, causing PHP errors. (I'll fix it one day.)

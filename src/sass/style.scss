@@ -155,6 +155,14 @@ body {
             &.greenbtn {
                 background-color: $green;
             }
+
+            &.bluebtn{
+                background-color: $blue;
+            }
+
+            &.redbtn{
+                background-color: $red;
+            }
         }
     }
 }
@@ -185,7 +193,7 @@ body {
     background-color: $background;
     grid-area: sidecontrol;
     max-height: 100%;
-    overflow: scroll;
+    overflow: auto;
 
     ul {
         padding-left: 0;
@@ -251,5 +259,32 @@ body {
 
     #myPieChart {
         max-width: 60%;
+    }
+}
+
+.notif{
+    background-color: #445f9e6c;
+    color: $color;
+    padding: 8px 4px;
+    border-radius: .3rem;
+    font-size: 18px;
+    transition: .4s;
+
+    &:hover{
+        padding: 8px;
+    }
+
+    cursor: default;
+
+    &.error{
+        background-color: #e63a126c;
+    }
+
+    &.success{
+        background-color: #27aa5c6c;
+    }
+
+    i{
+        margin: 0 10px;
     }
 }

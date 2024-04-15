@@ -1,4 +1,8 @@
 <?php
+// ! Remove this 2 lines if you want to show error
+error_reporting(E_ALL & ~E_NOTICE);
+ini_set('display_errors', 'Off');
+
 
 function tokenMaker($longueur = 18)
 {
@@ -46,7 +50,31 @@ $servData = json_decode($jsonServData, true);
 
 // ? Path to the account
 $tokenPath = "./data/account/" . $_COOKIE['sst_token'];
-$userJSON = json_decode($tokenPath."/data.json");
+$userJSON = json_decode($tokenPath."/data.json", true);
+
+// ? check for import
+// Chemin vers le fichier JSON de l'utilisateur
+$userJSONPath = "./data/account/" . $_COOKIE['sst_token'] . "/data.json";
+
+// Vérifiez si le fichier JSON de l'utilisateur existe avant de le charger
+if (file_exists($userJSONPath)) {
+    $userJSONContent = file_get_contents($userJSONPath);
+    $userJSON = json_decode($userJSONContent, true);
+
+    if (isset($userJSON['tokenTarget'])) {
+        $tokenTargetPath = "./data/account/" . $userJSON['tokenTarget'];
+        foreach (scandir("$tokenTargetPath/item/") as $tokenTargetItem) {
+            copy("$tokenTargetPath/item/$tokenTargetItem", "$tokenPath/item/$tokenTargetItem");
+
+            $existingJSON = file_get_contents("$tokenPath/item/$tokenTargetItem");
+            $existingData = json_decode($existingJSON, true);
+
+            $existingData['tokenTarget'] = $_POST['tokenTarget'];
+
+            file_put_contents("$tokenPath/item/$tokenTargetItem", json_encode($existingData, JSON_PRETTY_PRINT));
+        }
+    }
+}
 
 // ? serverDATA
 $serverJSON = file_get_contents('./data/serverData.json');

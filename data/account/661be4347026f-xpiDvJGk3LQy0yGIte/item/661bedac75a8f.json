@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=CZ75-Auto+%7C+Tacticat+%28Well-Worn%29",
     "itemQuality": "Well-Worn",
     "itemPriceDefault": "0.48",
-    "itemPriceActual": "0.50",
+    "itemPriceActual": "0.54",
     "itemType": "\u20ac",
     "track": [
         [
@@ -40,6 +40,28 @@
             {
                 "date": "14\/04\/2024",
                 "price": "0.50"
+            }
+        ],
+        {
+            "date": "15\/04\/2024",
+            "price": "0.55"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.55"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": ""
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.54"
+        },
+        [
+            {
+                "date": "15\/04\/2024",
+                "price": "0.54"
             }
         ]
     ]

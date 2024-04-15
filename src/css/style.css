@@ -119,6 +119,12 @@ body {
 .sidenav form input[type=submit].greenbtn {
   background-color: #27aa5c;
 }
+.sidenav form input[type=submit].bluebtn {
+  background-color: #3e5ea6;
+}
+.sidenav form input[type=submit].redbtn {
+  background-color: #e63a12;
+}
 
 .control {
   grid-area: control;
@@ -144,7 +150,7 @@ body {
   background-color: #121421;
   grid-area: sidecontrol;
   max-height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 .sidecontrol ul {
   padding-left: 0;
@@ -197,4 +203,26 @@ body {
 }
 .stats #myPieChart {
   max-width: 60%;
+}
+
+.notif {
+  background-color: rgba(68, 95, 158, 0.4235294118);
+  color: #fff;
+  padding: 8px 4px;
+  border-radius: 0.3rem;
+  font-size: 18px;
+  transition: 0.4s;
+  cursor: default;
+}
+.notif:hover {
+  padding: 8px;
+}
+.notif.error {
+  background-color: rgba(230, 58, 18, 0.4235294118);
+}
+.notif.success {
+  background-color: rgba(39, 170, 92, 0.4235294118);
+}
+.notif i {
+  margin: 0 10px;
 }/*# sourceMappingURL=style.css.map */

@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=Music+Kit+%7C+Austin+Wintory%2C+Bachram",
     "itemQuality": "Factory New",
     "itemPriceDefault": "1.86",
-    "itemPriceActual": "1.68",
+    "itemPriceActual": "1.70",
     "itemType": "\u20ac",
     "track": [
         {
@@ -23,6 +23,22 @@
         {
             "date": "14\/04\/2024",
             "price": "1.68"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "1.67"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "1.67"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "1.67"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "1.70"
         }
     ]
 }

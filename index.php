@@ -18,23 +18,18 @@
 </head>
 
 <body>
-    <!-- 
-    <header>
-
-        <div class="content">
-            <img src="./src/img/ksm-logo-white.png" alt="">
-
-            <a href=""><button><i class='bx bxs-dashboard'></i> Dashboard</button></a>
-            <a href=""><button><i class='bx bxs-cog'></i> Settings</button></a>
-        </div>
-
-    </header> -->
-
     <div class="container">
         <div class="header">
             <div class="content">
                 <img src="./src/img/ksmg-light.svg" alt="">
 
+                <?php
+                
+                echo $_GET['s'] ? '<div class="notif success"><i class="bx bxs-info-square" ></i>'. $_GET['s'] .'</div>' : '' ;
+                echo $_GET['e'] ? '<div class="notif error"><i class="bx bxs-info-square" ></i>'. $_GET['e'] .'</div>' : '' ;
+                echo $_GET['n'] ? '<div class="notif"><i class="bx bxs-info-square" ></i>'. $_GET['n'] .'</div>' : '' ;
+
+                ?>
                 <a href=""><button><i class='bx bxs-dashboard'></i> Dashboard</button></a>
                 <a href=""><button><i class='bx bxs-cog'></i> Settings</button></a>
                 <a href="https://github.com/kerogs/steam-store-tracker" target="_blank"><button><i class='bx bxl-github'></i> Github</button></a>
@@ -63,6 +58,21 @@
 
             <form action="all-refresh.php">
                 <input class="bluebtn" type="submit" value="All refresh">
+            </form>
+
+            <hr>
+
+            <h2>Import</h2>
+            <form action="settings-send.php" method="post">
+                <input type="text" value="<?= $userJSON['tokenTarget'] ?>" name="tokenTarget" placeholder="Token" id="" required>
+                <select name="tokenTargetAction" id="">
+                    <option value="1">only once</option>
+                    <option value="2">every time</option>
+                    <option value="3">remove all from</option>
+                </select>
+
+                <input class="greenbtn" type="submit" value="Import">
+                <input type="hidden" name="token" value="<?= $_COOKIE['sst_token'] ?>">
             </form>
         </div>
 
