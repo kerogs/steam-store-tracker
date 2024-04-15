@@ -141,7 +141,7 @@
                     }
 
 
-                    echo '<li class="' . $itemTypeColor . '"><span class="' . $itemNameType . '">' . $itemData['itemName'] . '</span> <span class="' . $itemTypeColor . '">' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ' (' . $itemData['itemPriceActual'] . $itemData['itemType'] . ') ' . $itemTypeIcon . '</span> </li>';
+                    echo '<li title="'.$itemData['itemID'].'" class="' . $itemTypeColor . '"><span class="' . $itemNameType . '">' . $itemData['itemName'] . '</span> <span class="' . $itemTypeColor . '">' . calculatePercentage($itemData['itemPriceDefault'], $itemData['itemPriceActual']) . ' (' . $itemData['itemPriceActual'] . $itemData['itemType'] . ') ' . $itemTypeIcon . '</span> </li>';
                 }
 
                 ?>
@@ -230,22 +230,14 @@
         <div class="control">
             <button data-name="total">Total value</button>
             <button data-name="most-profitable">Most profitable</button>
-            <button data-name="ohlc">OHLC</button>
-            <button data-name="tracker">Tracker</button>
         </div>
 
         <div class="stats">
             <div data-object="total">
                 <?php require_once './src/php/settings/graphic-circle.php' ?>
             </div>
-            <div style="display:none;" data-object="line">
-                <?php require_once './src/php/settings/graphic-ohlc.php' ?>
-            </div>
             <div style="display:none;" data-object="most-profitable">
                 <?php require_once './src/php/settings/graphic-mostprofitable.php' ?>
-            </div>
-            <div style="display:none;" data-object="tracker">
-                <!-- <?php require_once './src/php/settings/graphic-tracker.php' ?> -->
             </div>
         </div>
     </div>

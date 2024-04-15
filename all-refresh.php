@@ -19,6 +19,12 @@ foreach ($itemFiles as $itemFile) {
         $getJSON = file_get_contents($itemURLJSON);
         $decodedJSON = json_decode($getJSON);
 
+        // Vérifier si le prix le plus bas est vide
+        if (empty($decodedJSON->lowest_price)) {
+            // Si le prix est vide, quitter cette itération et passer à l'élément suivant
+            continue;
+        }
+
         // Extraire le prix le plus bas de l'objet JSON
         $itemPriceActual = str_replace(',', '.', preg_replace('/[^0-9,.]/', '', $decodedJSON->lowest_price));
 
@@ -40,11 +46,10 @@ foreach ($itemFiles as $itemFile) {
         // Enregistrer le contenu JSON mis à jour dans le fichier
         file_put_contents($itemFile, json_encode($itemJSON, JSON_PRETTY_PRINT));
 
-        // Afficher le message de mise à jour pour cet élément
-        echo "Update for: " . $itemJSON['itemName'] . "<br>";
-
         // Ajouter un délai d'une seconde
-        sleep(1);
+        sleep(.5);
     }
 }
+
+header('Location: ./?s=update items done.')
 ?>
