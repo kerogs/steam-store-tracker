@@ -189,6 +189,13 @@ body {
 .list table button {
   cursor: pointer;
 }
+.list table a {
+  color: #3e5ea6;
+  text-decoration: none;
+}
+.list table a:hover {
+  text-decoration: underline;
+}
 
 .stats {
   grid-area: stats;

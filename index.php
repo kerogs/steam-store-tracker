@@ -230,6 +230,7 @@
         <div class="control">
             <button data-name="total">Total value</button>
             <button data-name="most-profitable">Most profitable</button>
+            <button data-name="gain">Gain</button>
         </div>
 
         <div class="stats">
@@ -238,6 +239,9 @@
             </div>
             <div style="display:none;" data-object="most-profitable">
                 <?php require_once './src/php/settings/graphic-mostprofitable.php' ?>
+            </div>
+            <div style="display:none;" data-object="gain">
+                <?php require_once './src/php/settings/gain.php' ?>
             </div>
         </div>
     </div>

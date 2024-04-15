@@ -5,7 +5,7 @@
     "itemURLJSON": "https:\/\/steamcommunity.com\/market\/priceoverview\/?country=US&currency=3&appid=730&market_hash_name=Glock-18+%7C+Candy+Apple+%28Minimal+Wear%29",
     "itemQuality": "Minimal Wear",
     "itemPriceDefault": "0.39",
-    "itemPriceActual": "0.40",
+    "itemPriceActual": "0.39",
     "itemType": "\u20ac",
     "track": [
         {
@@ -65,6 +65,14 @@
         {
             "date": "15\/04\/2024",
             "price": "0.40"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.39"
+        },
+        {
+            "date": "15\/04\/2024",
+            "price": "0.39"
         }
     ]
 }
